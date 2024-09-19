@@ -61,6 +61,8 @@
                 android:text="+/-" />
 
             <com.google.android.material.button.MaterialButton
+                android:onClick="onOperationClick"
+                android:id="@+id/percent_btn"
                 style="@style/gray.btn"
                 android:layout_marginRight="18dp"
                 android:text="%" />
@@ -186,9 +188,11 @@
                 android:textAlignment="viewStart" />
 
             <com.google.android.material.button.MaterialButton
+                android:onClick="onNumberclick"
+                android:id="@+id/dot_btn"
                 style="@style/dark.gray.btn"
                 android:layout_marginRight="18dp"
-                android:text="%" />
+                android:text="." />
 
             <com.google.android.material.button.MaterialButton
                 android:onClick="onOperationClick"

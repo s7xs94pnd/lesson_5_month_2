@@ -11,9 +11,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
-    private Integer first,second,result;
+    private Double first,second,result;
     private boolean clicked_simvil;
     private String operation;
     @Override
@@ -31,10 +33,15 @@ public class MainActivity extends AppCompatActivity {
     public void onNumberclick(View view) {
         String text = ((MaterialButton)view).getText().toString();
         if (text.equals("AC")){
-            first=0;
-            second=0;
+            first=0.0;
+            second=0.0;
             textView.setText("0");
-        }else if (textView.getText().toString().equals("0")||clicked_simvil) {
+        }else if(text.equals(".")){
+            if (!textView.getText().toString().contains(".")){
+                textView.append(text);
+            }
+        }
+        else if (textView.getText().toString().equals("0")||clicked_simvil) {
             textView.setText(text);
         } else {
             textView.append(text);
@@ -43,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onOperationClick(View view) {
-        if (view.getId()== R.id.plus_btn|| view.getId()== R.id.minus_btn||view.getId()== R.id.devided_btn||view.getId()== R.id.multiply_btn) {
-            first = Integer.parseInt(textView.getText().toString());
+        if (view.getId()== R.id.plus_btn|| view.getId()== R.id.minus_btn||view.getId()== R.id.devided_btn||view.getId()== R.id.multiply_btn||view.getId()==R.id.percent_btn) {
+            first = Double.parseDouble(textView.getText().toString());
             if (view.getId() == R.id.plus_btn) {
                 operation = "+";
             }
@@ -57,9 +64,12 @@ public class MainActivity extends AppCompatActivity {
             if (view.getId() == R.id.multiply_btn) {
                 operation = "*";
             }
+            if (view.getId() == R.id.percent_btn) {
+                operation = "%";
+            }
         }
         else if (view.getId()==R.id.equal_btn){
-            second= Integer.parseInt(textView.getText().toString());
+            second= Double.parseDouble(textView.getText().toString());
             switch (operation) {
                 case "+":
                     result = first + second;
@@ -73,9 +83,17 @@ public class MainActivity extends AppCompatActivity {
                 case"*":
                     result=first * second;
                     break;
+                case "%":
+                    result = second * (first/100);
             }
-            textView.setText(result.toString());
+            DecimalFormat df = new DecimalFormat("#.##");
+            String DF_result = df.format(result);
+            if (DF_result.endsWith(".0")){
+                DF_result=DF_result.substring(0,DF_result.length()-2);
+            }
+            textView.setText(DF_result);
         }
         clicked_simvil=true;
     }
+
 }
