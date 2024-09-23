@@ -1,5 +1,6 @@
 package com.example.lesson_5_month_2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +28,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         textView = findViewById(R.id.text_view);
+
+        findViewById(R.id.next_activity_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nxt_Activity = new Intent(MainActivity.this, nextActivity.class);
+                String msg = textView.getText().toString();
+                nxt_Activity.putExtra("msg", msg);
+                startActivity(nxt_Activity);
+            }
+        });
     }
 
     public void onNumberclick(View view) {
@@ -92,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 DF_result=DF_result.substring(0,DF_result.length()-2);
             }
             textView.setText(DF_result);
+
+            findViewById(R.id.next_activity_btn).setVisibility(View.VISIBLE);
         }
         clicked_simvil=true;
     }

@@ -14,7 +14,21 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="10dp"
+            android:id="@+id/next_activity_btn"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:text="Next activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orange"
+            android:visibility="gone"/>
+
         <HorizontalScrollView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
